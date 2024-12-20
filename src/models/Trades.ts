@@ -6,7 +6,6 @@ export type TradeType = {
     type: string;
     outAmount: string;
     inAmount: string;
-    index: string;
     hash: string;
     created_at: Date;
 };
@@ -23,10 +22,6 @@ const tradeSchema: Schema = new Schema({
         required: true
     },
     inAmount: {
-        type: String,
-        required: true
-    },
-    index: {
         type: String,
         required: true
     },
