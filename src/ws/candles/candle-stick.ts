@@ -11,11 +11,11 @@ let currentCandles: {
 export const INTERVAL = 60 * 1000; /// 1min
 
 const calculateMax = (a: bigint, b: bigint): bigint => {
-    return a > b ? a : b;
+    return a >= b ? a : b;
 };
 
 const calculateMin = (a: bigint, b: bigint): bigint => {
-    return a < b ? a : b;
+    return a <= b ? a : b;
 };
 
 const getKey = (tokenAddress: string, time: Date): string => {
@@ -28,15 +28,9 @@ const calculateStartTime = (timestamp: number): Date => {
 
 const calculatePrice = (trade: TradeCall): bigint => {
 
-    const isBuy = trade.tradeType === 'buy';
-
     const PRECISION = 18n;
 
-    if (isBuy) {
-        return (trade.inAmount * (10n ** PRECISION)) / trade.outAmount;
-    } else {
-        return (trade.outAmount * (10n ** PRECISION)) / trade.inAmount;
-    }
+    return (trade.reserveTARA * (10n ** PRECISION)) / trade.reserveTokens;
 };
 
 const calculateVolume = (trade: TradeCall): bigint => {
@@ -110,10 +104,9 @@ const initializeCandle = async (trade: TradeCall, price: bigint, volume: bigint)
     else {
         const token = await Token.findOne({ address: trade.funContract.toLowerCase() });
         openPrice = BigInt(token.initial_price);
+
+        console.log('INITIAL PRICE FROM TOKEN', openPrice);
     }
-
-
-
 
     const candle: CandleData = {
         open: openPrice,
@@ -131,7 +124,7 @@ const initializeCandle = async (trade: TradeCall, price: bigint, volume: bigint)
         lastPrice: price,
         timeoutId: undefined
     };
-
+    
     candle.timeoutId = setupCandleSaveTimeout(key, startTime);
 
     return candle;
@@ -161,6 +154,9 @@ const updateCandle = (candle: CandleData, trade: TradeCall, price: bigint, volum
 };
 
 export const processTrade = async (trade: TradeCall, emitter: EventEmitter): Promise<void> => {
+
+    console.log('Processing trade:', trade);
+
     const timestamp = Number(trade.timestamp) * 1000;
     const tokenAddress = trade.funContract.toLowerCase();
     const price = calculatePrice(trade);

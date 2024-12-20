@@ -1,13 +1,11 @@
-import { formatUnits, PublicClient } from "viem";
-import { decodeAbiParameters } from 'viem'
-import { WebSocketServer, WebSocket } from 'ws';
+import { PublicClient } from "viem";
 import { EventEmitter } from 'events';
 
-import Token, { IToken } from "../../models/Tokens";
+import Token from "../../models/Tokens";
 import User, { IUser } from "../../models/Users";
 import Trade, { ITrade } from "../../models/Trades";
 
-import { deployerSC, eventTrackerSC } from '../../config/web3';
+import { deployerSC, poolSC } from '../../config/web3';
 import { getTokenMarketCap } from "../../utils/marketcap";
 
 import { processTrade } from "../candles/candle-stick";
@@ -20,8 +18,8 @@ export const watchTradeCallEvents = async (
     console.log('Starting event watcher...');
 
     const unwatch = client.watchContractEvent({
-        address: eventTrackerSC.address,
-        abi: eventTrackerSC.abi,
+        address: poolSC.address,
+        abi: poolSC.abi,
         eventName: 'tradeCall',
         onLogs: async (logs: any) => {
             const trade: TradeCall = logs[0].args;
@@ -57,7 +55,6 @@ export const watchTradeCallEvents = async (
                     type: trade.tradeType,
                     outAmount: (trade.outAmount).toString(),
                     inAmount: (trade.inAmount).toString(),
-                    index: (trade.index).toString(),
                     hash: logs[0].transactionHash,
                     user_wallet: user.wallet,
                     token_address: trade.funContract,
