@@ -1,0 +1,51 @@
+{
+  "name": "taraxa-fun-server",
+  "version": "1.0.0",
+  "description": "A simple express server for the Taraxa Fun project",
+  "author": "Three Sixty Labs",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch-tsc": "tsc -w",
+    "dev": "nodemon ./src/server.ts",
+    "start": "node ./dist/server.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.14.0",
+    "@google-cloud/vision": "^4.3.2",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.6",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "express-ws": "^5.0.2",
+    "gravatar": "^1.8.2",
+    "helmet": "^8.0.0",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^6.11.0",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1",
+    "request": "^2.88.2",
+    "uuid": "^11.0.3",
+    "viem": "^2.21.53",
+    "ws": "^8.18.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/config": "3.3.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.14",
+    "@types/express-ws": "^3.0.5",
+    "@types/gravatar": "^1.8.3",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/mongoose": "^5.11.97",
+    "@types/multer": "^1.4.12",
+    "@types/ws": "^8.5.13",
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^5.7.2"
+  }
+}
