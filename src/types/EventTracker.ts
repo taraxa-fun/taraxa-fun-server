@@ -33,6 +33,8 @@ export type TradeCall = {
     funContract: `0x${string}`;
     outAmount: bigint;
     inAmount: bigint;
+    reserveTARA: bigint;
+    reserveTokens: bigint;
     index: bigint;
     timestamp: bigint;
     tradeType: string;
