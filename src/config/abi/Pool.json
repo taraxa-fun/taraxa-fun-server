@@ -13,7 +13,7 @@
             },
             {
                 "internalType": "address",
-                "name": "_lpLockDeployer",
+                "name": "_LPManager",
                 "type": "address"
             },
             {
@@ -25,11 +25,6 @@
                 "internalType": "address",
                 "name": "_eventTracker",
                 "type": "address"
-            },
-            {
-                "internalType": "uint16",
-                "name": "_feePer",
-                "type": "uint16"
             }
         ],
         "stateMutability": "payable",
@@ -99,7 +94,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "ethAmount",
+                "name": "taraAmount",
                 "type": "uint256",
                 "indexed": false
             }
@@ -131,116 +126,6 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "user",
-                "type": "address",
-                "indexed": true
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountIn",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountOut",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "_time",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveEth",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveTokens",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "totalVolume",
-                "type": "uint256",
-                "indexed": false
-            }
-        ],
-        "type": "event",
-        "name": "bought",
-        "anonymous": false
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address",
-                "indexed": true
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountIn",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountOut",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "_time",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveEth",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveTokens",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "string",
-                "name": "tradeType",
-                "type": "string",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "totalVolume",
-                "type": "uint256",
-                "indexed": false
-            }
-        ],
-        "type": "event",
-        "name": "funTradeCall",
-        "anonymous": false
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address",
-                "indexed": true
-            },
-            {
-                "internalType": "address",
                 "name": "tokenAddress",
                 "type": "address",
                 "indexed": true
@@ -248,6 +133,12 @@
             {
                 "internalType": "address",
                 "name": "router",
+                "type": "address",
+                "indexed": true
+            },
+            {
+                "internalType": "address",
+                "name": "pair",
                 "type": "address",
                 "indexed": true
             },
@@ -265,7 +156,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "_time",
+                "name": "time",
                 "type": "uint256",
                 "indexed": false
             },
@@ -278,55 +169,6 @@
         ],
         "type": "event",
         "name": "listed",
-        "anonymous": false
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address",
-                "indexed": true
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountIn",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "amountOut",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "_time",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveEth",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "reserveTokens",
-                "type": "uint256",
-                "indexed": false
-            },
-            {
-                "internalType": "uint256",
-                "name": "totalVolume",
-                "type": "uint256",
-                "indexed": false
-            }
-        ],
-        "type": "event",
-        "name": "sold",
         "anonymous": false
     },
     {
@@ -346,25 +188,12 @@
         "inputs": [],
         "stateMutability": "view",
         "type": "function",
-        "name": "DEAD",
+        "name": "LPManager",
         "outputs": [
             {
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ]
-    },
-    {
-        "inputs": [],
-        "stateMutability": "view",
-        "type": "function",
-        "name": "HUNDRED",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ]
     },
@@ -446,45 +275,6 @@
         ]
     },
     {
-        "inputs": [
-            {
-                "internalType": "string[2]",
-                "name": "_name_symbol",
-                "type": "string[2]"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_totalSupply",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "_creator",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256[2]",
-                "name": "listThreshold_initReserveEth",
-                "type": "uint256[2]"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_maxBuyPerWallet",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "payable",
-        "type": "function",
-        "name": "createFun",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ]
-    },
-    {
         "inputs": [],
         "stateMutability": "view",
         "type": "function",
@@ -524,15 +314,26 @@
         ]
     },
     {
-        "inputs": [],
-        "stateMutability": "view",
+        "inputs": [
+            {
+                "internalType": "int256",
+                "name": "tickSpacing",
+                "type": "int256"
+            },
+            {
+                "internalType": "bool",
+                "name": "nearestToMin",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "pure",
         "type": "function",
-        "name": "feePer",
+        "name": "findNearestValidTick",
         "outputs": [
             {
-                "internalType": "uint16",
+                "internalType": "int256",
                 "name": "",
-                "type": "uint16"
+                "type": "int256"
             }
         ]
     },
@@ -551,7 +352,7 @@
         ],
         "stateMutability": "view",
         "type": "function",
-        "name": "getAmountOutETH",
+        "name": "getAmountOutTARA",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -598,7 +399,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "ethIN",
+                "name": "taraIN",
                 "type": "uint256"
             }
         ],
@@ -715,7 +516,7 @@
                             },
                             {
                                 "internalType": "uint256",
-                                "name": "reserveETH",
+                                "name": "reserveTARA",
                                 "type": "uint256"
                             },
                             {
@@ -730,7 +531,7 @@
                             },
                             {
                                 "internalType": "uint256",
-                                "name": "initialReserveEth",
+                                "name": "initialReserveTARA",
                                 "type": "uint256"
                             },
                             {
@@ -818,7 +619,7 @@
                             },
                             {
                                 "internalType": "uint256",
-                                "name": "reserveETH",
+                                "name": "reserveTARA",
                                 "type": "uint256"
                             },
                             {
@@ -833,7 +634,7 @@
                             },
                             {
                                 "internalType": "uint256",
-                                "name": "initialReserveEth",
+                                "name": "initialReserveTARA",
                                 "type": "uint256"
                             },
                             {
@@ -890,10 +691,36 @@
         ]
     },
     {
-        "inputs": [],
-        "stateMutability": "view",
+        "inputs": [
+            {
+                "internalType": "string[2]",
+                "name": "_name_symbol",
+                "type": "string[2]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_totalSupply",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_creator",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256[2]",
+                "name": "listThreshold_initReserveTARA",
+                "type": "uint256[2]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_maxBuyPerWallet",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "payable",
         "type": "function",
-        "name": "lpLockDeployer",
+        "name": "initFun",
         "outputs": [
             {
                 "internalType": "address",
@@ -912,19 +739,6 @@
                 "internalType": "address",
                 "name": "",
                 "type": "address"
-            }
-        ]
-    },
-    {
-        "inputs": [],
-        "stateMutability": "view",
-        "type": "function",
-        "name": "poolFee",
-        "outputs": [
-            {
-                "internalType": "uint24",
-                "name": "",
-                "type": "uint24"
             }
         ]
     },
@@ -1063,25 +877,13 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_newLpLockDeployer",
+                "name": "_newLPManager",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "function",
-        "name": "setLpLockDeployer"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint24",
-                "name": "_newPoolFee",
-                "type": "uint24"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function",
-        "name": "setPoolFee"
+        "name": "setLPManager"
     },
     {
         "inputs": [
@@ -1122,26 +924,26 @@
     {
         "inputs": [
             {
+                "internalType": "uint24",
+                "name": "_newuniswapPoolFee",
+                "type": "uint24"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function",
+        "name": "setuniswapPoolFee"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
-                "name": "_newWETH",
+                "name": "_newwtara",
                 "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
         "type": "function",
-        "name": "setWETH"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint16",
-                "name": "_newFeePer",
-                "type": "uint16"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function",
-        "name": "setteamFeeper"
+        "name": "setwtara"
     },
     {
         "inputs": [],
@@ -1215,7 +1017,7 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "reserveETH",
+                        "name": "reserveTARA",
                         "type": "uint256"
                     },
                     {
@@ -1230,7 +1032,7 @@
                     },
                     {
                         "internalType": "uint256",
-                        "name": "initialReserveEth",
+                        "name": "initialReserveTARA",
                         "type": "uint256"
                     },
                     {
@@ -1265,6 +1067,19 @@
         "name": "transferOwnership"
     },
     {
+        "inputs": [],
+        "stateMutability": "view",
+        "type": "function",
+        "name": "uniswapPoolFee",
+        "outputs": [
+            {
+                "internalType": "uint24",
+                "name": "",
+                "type": "uint24"
+            }
+        ]
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -1292,7 +1107,7 @@
         "inputs": [],
         "stateMutability": "view",
         "type": "function",
-        "name": "weth",
+        "name": "wtara",
         "outputs": [
             {
                 "internalType": "address",
