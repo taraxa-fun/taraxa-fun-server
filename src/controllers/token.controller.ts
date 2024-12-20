@@ -20,9 +20,7 @@ export const createToken = async (req: Request, res: Response) => {
 
     try {
         const token: IToken = await Token.findOne({ address: address.toLowerCase(), user_wallet: req.userWallet });
-        if (token.is_initialized) {
-            return res.status(400).json({ message: "Token already initialized" });
-        }
+
 
         if (!token) {
             await Token.create({
@@ -35,6 +33,10 @@ export const createToken = async (req: Request, res: Response) => {
             });
         }
         else {
+            if (token.is_initialized) {
+                return res.status(400).json({ message: "Token already initialized" });
+            }
+
             token.twitter = twitter;
             token.telegram = telegram;
             token.website = website;
