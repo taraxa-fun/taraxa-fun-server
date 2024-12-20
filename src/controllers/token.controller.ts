@@ -21,7 +21,6 @@ export const createToken = async (req: Request, res: Response) => {
     try {
         const token: IToken = await Token.findOne({ address: address.toLowerCase(), user_wallet: req.userWallet });
 
-
         if (!token) {
             await Token.create({
                 address: address.toLowerCase(),
