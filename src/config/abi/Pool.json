@@ -172,6 +172,61 @@
         "anonymous": false
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "caller",
+                "type": "address",
+                "indexed": true
+            },
+            {
+                "internalType": "address",
+                "name": "funContract",
+                "type": "address",
+                "indexed": true
+            },
+            {
+                "internalType": "uint256",
+                "name": "inAmount",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "internalType": "uint256",
+                "name": "reserveTARA",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "internalType": "uint256",
+                "name": "reserveTokens",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "internalType": "uint256",
+                "name": "timestamp",
+                "type": "uint256",
+                "indexed": false
+            },
+            {
+                "internalType": "string",
+                "name": "tradeType",
+                "type": "string",
+                "indexed": false
+            }
+        ],
+        "type": "event",
+        "name": "tradeCall",
+        "anonymous": false
+    },
+    {
         "inputs": [],
         "stateMutability": "view",
         "type": "function",
